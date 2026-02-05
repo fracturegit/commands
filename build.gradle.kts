@@ -1,7 +1,51 @@
-@file:Suppress("PropertyName")
+plugins {
+    kotlin("jvm") version("2.3.0")
+    id("java")
+    id("maven-publish")
+}
 
-val minestom_version: String by properties
+
+group = "net.mcbrawls"
+version = "1.0.0"
+
+repositories {
+    mavenCentral()
+}
 
 dependencies {
-    implementation("net.minestom:minestom:$minestom_version")
+    api("net.minestom:minestom:2026.01.08-1.21.11")
+}
+
+kotlin {
+    jvmToolchain(25)
+}
+
+java {
+    withSourcesJar()
+    withJavadocJar()
+}
+
+publishing {
+    publications {
+        create<MavenPublication>("maven") {
+            from(components["java"])
+            groupId = project.group as String
+            artifactId = project.name
+            version = project.version as String
+        }
+    }
+
+    repositories {
+        val mavenUrl = System.getenv("MAVEN_URL")
+        if (mavenUrl != null) {
+            maven {
+                name = "envmaven"
+                url = uri(mavenUrl)
+                credentials {
+                    username = System.getenv("MAVEN_USERNAME")
+                    password = System.getenv("MAVEN_PASSWORD")
+                }
+            }
+        }
+    }
 }
