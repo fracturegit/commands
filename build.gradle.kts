@@ -13,7 +13,8 @@ repositories {
 }
 
 dependencies {
-    api("net.minestom:minestom:2026.01.08-1.21.11")
+    api("net.minestom:minestom:2026.05.17c-26.1.1")
+    api("org.slf4j:slf4j-api:2.0.17")
 }
 
 kotlin {
