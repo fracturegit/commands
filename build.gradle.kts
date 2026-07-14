@@ -13,7 +13,7 @@ repositories {
 }
 
 dependencies {
-    api("net.minestom:minestom:2026.06.05-26.1.2")
+    api("net.minestom:minestom:2026.07.12-26.2")
     api("org.slf4j:slf4j-api:2.0.17")
 }
 
